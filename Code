@@ -1,0 +1,96 @@
+#include <iostream>
+using namespace std;
+
+void merge(int arr[], int p, int q, int r) 
+{
+  int n1, n2;
+  n1 = q - p + 1;
+  n2 = r - q;
+  int L[n1];
+  int R[n2];
+  int i;
+  int j;
+
+  for (i = 0; i < n1; i++) 
+  {
+
+    L[i] = arr[i + p];
+  }
+  for (j = 0; j < n2; j++) 
+  {
+
+    R[j] = arr[j + q + 1];
+  }
+  i = 0;
+  j = 0;
+  int k = p;
+  while (i < n1 && j < n2) 
+  {
+
+    if (L[i] <= R[j]) 
+    {
+
+      arr[k] = L[i];
+      i++;
+    } 
+    else 
+    {
+      arr[k] = R[j];
+      j++;
+    }
+    k++;
+  }
+  while (i < n1) 
+  {
+    arr[k] = L[i];
+    i++;
+    k++;
+  }
+  while (j < n2) 
+  {
+    arr[k] = R[j];
+    j++;
+    k++;
+    
+  }
+
+ 
+}
+ 
+void merge_Sort(int arr[], int l, int r) 
+{
+
+  if (l < r)
+  {
+
+    int mid = (l + (r - 1)) / 2;
+    merge_Sort(arr,l,mid);
+    merge_Sort(arr,mid + 1,r);
+    merge(arr,l,mid,r);
+  }
+}
+int main() 
+{
+  
+  int n,size,arr1[100];
+  cin>>n;
+  for(int i=0;i<n;i++)
+    {
+     
+      cin>>size;
+      for(int j=0;j<size;j++)
+        {
+            cin>>arr1[j];
+      
+        }
+            merge_Sort(arr1,0,size-1);
+            for (int j = 0; j <size; j++) 
+        {
+
+          cout<< arr1[j]<<" ";
+        }
+    
+      
+ }
+  return 0;
+}
